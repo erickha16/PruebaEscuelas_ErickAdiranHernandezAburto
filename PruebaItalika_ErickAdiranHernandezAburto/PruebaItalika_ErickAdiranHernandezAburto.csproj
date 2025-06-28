@@ -19,7 +19,8 @@
 
   <ItemGroup>
     <Folder Include="Constants\" />
-    <Folder Include="Services\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Services\Implementations\" />
   </ItemGroup>
 
 </Project>
