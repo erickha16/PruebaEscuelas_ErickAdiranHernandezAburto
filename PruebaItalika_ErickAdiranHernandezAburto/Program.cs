@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection")));
 
 //Agregar servicios de la aplicación
+builder.Services.AddScoped<IAlumnoServicio, AlumnoServicio>();
+
 builder.Services.AddScoped<IEscuelaServicio, EscuelaServicio>();
 
 builder.Services.AddScoped<IProfesorServicio, ProfesorServicio>();
