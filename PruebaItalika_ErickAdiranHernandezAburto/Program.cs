@@ -1,4 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using PruebaItalika_ErickAdiranHernandezAburto.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Agregar DbContext para la aplicaicón principal
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection")));
+
+//Agregar servicios de la aplicación
+
 
 // Add services to the container.
 
