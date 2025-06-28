@@ -119,7 +119,9 @@ GO
 CREATE PROCEDURE dbo.Profesores_Listar
 AS
 BEGIN
-    SELECT * FROM Profesores;
+    SELECT P.*, E.Nombre AS Escuela
+    FROM Profesores P
+    INNER JOIN Escuelas E on P.EscuelaId = E.Id;
 END;
 GO
 
@@ -128,8 +130,10 @@ CREATE PROCEDURE dbo.Profesores_PorId
     @Id INT
 AS
 BEGIN
-    SELECT * FROM Profesores
-    WHERE Id = @Id;
+    SELECT P.*, E.Nombre AS EscuelaNombre
+    FROM Profesores P
+    INNER JOIN Escuelas E ON P.EscuelaId = E.Id
+    WHERE P.Id = @Id;
 END;
 GO
 
