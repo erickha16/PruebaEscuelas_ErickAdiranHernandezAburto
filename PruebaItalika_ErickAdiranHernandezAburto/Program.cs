@@ -11,6 +11,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 //Agregar servicios de la aplicación
 builder.Services.AddScoped<IEscuelaServicio, EscuelaServicio>();
 
+builder.Services.AddScoped<IProfesorServicio, ProfesorServicio>();
+
 // Add services to the container.
 
 builder.Services.AddControllers();
