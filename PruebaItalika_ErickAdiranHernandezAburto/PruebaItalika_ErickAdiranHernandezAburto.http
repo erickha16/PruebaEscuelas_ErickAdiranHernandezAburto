@@ -1,0 +1,6 @@
+@PruebaItalika_ErickAdiranHernandezAburto_HostAddress = http://localhost:5258
+
+GET {{PruebaItalika_ErickAdiranHernandezAburto_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
