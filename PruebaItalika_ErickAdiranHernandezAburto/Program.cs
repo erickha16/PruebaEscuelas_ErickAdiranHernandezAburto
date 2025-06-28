@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PruebaItalika_ErickAdiranHernandezAburto.Data;
+using PruebaItalika_ErickAdiranHernandezAburto.Services.Implementations;
+using PruebaItalika_ErickAdiranHernandezAburto.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection")));
 
 //Agregar servicios de la aplicación
-
+builder.Services.AddScoped<IEscuelaServicio, EscuelaServicio>();
 
 // Add services to the container.
 

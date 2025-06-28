@@ -1,4 +1,5 @@
-﻿using PruebaItalika_ErickAdiranHernandezAburto.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PruebaItalika_ErickAdiranHernandezAburto.Data;
 using PruebaItalika_ErickAdiranHernandezAburto.DTOs;
 using PruebaItalika_ErickAdiranHernandezAburto.Services.Interfaces;
 
@@ -16,28 +17,57 @@ namespace PruebaItalika_ErickAdiranHernandezAburto.Services.Implementations
 
         //Implementación de servicios
 
-        public Task<List<EscuelaDTO>> GetAllAsync()
+        public async Task<List<EscuelaDTO>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var escuelas = await _context.Escuelas
+                .FromSqlRaw("EXEC dbo.Escuelas_Listar").ToListAsync();
+
+            return escuelas;
         }
 
-        public Task<EscuelaDTO> GetByIdAsync(int id)
+        public async Task<EscuelaDTO> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var escuelas = await _context.Escuelas
+             .FromSqlRaw("EXEC dbo.Escuelas_PorId @Id = {0}", id)
+             .ToListAsync();
+
+            var escuela = escuelas.FirstOrDefault();
+
+            if (escuela == null)
+                throw new KeyNotFoundException($"No se encontró la escuela con el ID {id}.");
+
+            return escuela;
+
         }
 
-        public Task AddAsync(EscuelaDTO escuelaDTO)
+        
+
+        public async Task AddAsync(EscuelaDTO escuelaDTO)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlRawAsync(
+                "EXEC dbo.Escuelas_Crear @Codigo = {0}, @Nombre = {1}, @Descripcion = {2}",
+                escuelaDTO.Codigo,
+                escuelaDTO.Nombre,
+                escuelaDTO.Descripcion
+            );
         }
-        public Task UpdateAsync(EscuelaDTO escuelaDTO)
+        public async Task UpdateAsync(EscuelaDTO escuelaDTO)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlRawAsync(
+                "EXEC dbo.Escuelas_Actualizar @Id = {0}, @Codigo = {1}, @Nombre = {2}, @Descripcion = {3}",
+                escuelaDTO.Id,
+                escuelaDTO.Codigo,
+                escuelaDTO.Nombre,
+                escuelaDTO.Descripcion
+            );
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlRawAsync(
+                "EXEC dbo.Escuelas_Eliminar @Id = {0}",
+                id
+            );
         }
 
     }

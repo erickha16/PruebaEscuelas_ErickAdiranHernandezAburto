@@ -15,27 +15,27 @@ namespace PruebaItalika_ErickAdiranHernandezAburto.Services.Implementations
         }
 
         //Implemnetación de Servicios
-        public Task<List<AlumnoDTO>> GetAllAsync()
+        public async Task<List<AlumnoDTO>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<AlumnoDTO> GetByIdAsync(int id)
+        public async Task<AlumnoDTO> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task AddAsync(AlumnoDTO alumnoDTO)
+        public async Task AddAsync(AlumnoDTO alumnoDTO)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(AlumnoDTO alumnoDTO)
+        public async Task UpdateAsync(AlumnoDTO alumnoDTO)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
