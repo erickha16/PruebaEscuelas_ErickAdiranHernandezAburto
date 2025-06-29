@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PruebaItalika_ErickAdiranHernandezAburto.DTOs;
+using PruebaItalika_ErickAdiranHernandezAburto.DTOs.Relaciones;
 
 namespace PruebaItalika_ErickAdiranHernandezAburto.Data
 {
@@ -13,14 +14,20 @@ namespace PruebaItalika_ErickAdiranHernandezAburto.Data
 
         public DbSet<ProfesorDTO> Profesores { get; set; }
 
+        public DbSet<AlumnoPorProfesorDTO> AlumnoProfesor { get; set; }
+
+        public DbSet<EscuelaYAlumnosDTO> EscuelaYAlumnos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Marcamos todos los DTOs como sin clave porque no representan una tabla real
+            // Los DTOs se marcan sin clave porque no representan una tabla real
             modelBuilder.Entity<AlumnoDTO>().HasNoKey();
             modelBuilder.Entity<EscuelaDTO>().HasNoKey();
             modelBuilder.Entity<ProfesorDTO>().HasNoKey();
+            modelBuilder.Entity<AlumnoPorProfesorDTO>().HasNoKey();
+            modelBuilder.Entity<EscuelaYAlumnosDTO>().HasNoKey();
         }
     }
 }

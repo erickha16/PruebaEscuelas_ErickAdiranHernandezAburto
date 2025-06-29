@@ -15,6 +15,8 @@ builder.Services.AddScoped<IEscuelaServicio, EscuelaServicio>();
 
 builder.Services.AddScoped<IProfesorServicio, ProfesorServicio>();
 
+builder.Services.AddScoped<IRelacionesServicio, RelacionesServicio>();
+
 // Add services to the container.
 
 builder.Services.AddControllers();

@@ -305,46 +305,25 @@ BEGIN
 END;
 GO
 
--- Eliminar una inscripción
-CREATE PROCEDURE dbo.Inscripciones_Eliminar
-    @AlumnoId INT,
-    @EscuelaId INT
+-- ---------------------- Conusltas Extra -----------------------
+-- Consultar todos los Escuelas que imparte un profesor y los alumnos inscritos. 
+CREATE PROCEDURE dbo.Consultar_EscuelasYAlumnosPorProfesor
+    @ProfesorId INT
 AS
 BEGIN
-    DELETE FROM Inscripciones
-    WHERE AlumnoId = @AlumnoId AND EscuelaId = @EscuelaId;
-END;
+    SELECT
+        e.Id AS EscuelaId,
+        e.Nombre AS EscuelaNombre,
+        a.Id AS AlumnoId,
+        a.Nombre AS AlumnoNombre,
+        a.Apellido AS AlumnoApellido
+    FROM AlumnoProfesor ap
+    INNER JOIN Alumnos a ON ap.AlumnoId = a.Id
+    INNER JOIN Inscripciones i ON i.AlumnoId = a.Id
+    INNER JOIN Escuelas e ON i.EscuelaId = e.Id
+    WHERE ap.ProfesorId = @ProfesorId
+END
 GO
-
--- Obtener escuelas en las que está inscrito un alumno
-CREATE PROCEDURE dbo.Inscripciones_EscuelasPorAlumno
-    @AlumnoId INT
-AS
-BEGIN
-    SELECT E.*
-    FROM Escuelas E
-    INNER JOIN Inscripciones I ON E.Id = I.EscuelaId
-    WHERE I.AlumnoId = @AlumnoId;
-END;
-GO
-
--- Obtener alumnos inscritos en una escuela
-CREATE PROCEDURE dbo.Inscripciones_AlumnosPorEscuela
-    @EscuelaId INT
-AS
-BEGIN
-    SELECT A.*
-    FROM Alumnos A
-    INNER JOIN Inscripciones I ON A.Id = I.AlumnoId
-    WHERE I.EscuelaId = @EscuelaId;
-END;
-GO
-
-
-
-
-
-
 
 
 
